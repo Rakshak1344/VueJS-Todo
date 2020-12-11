@@ -2,6 +2,9 @@ require('dotenv').config()
 
 const express = require('express')
 const chalk = require('chalk')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const cors = require('cors')
 
 // Require Routes
 const todoRoute = require('./Routes/todo')
@@ -13,7 +16,10 @@ require('./mongoose')
 
 
 const app = express()
-app.use(express.json())
+app.use(cors())
+app.use(morgan('tiny'))
+app.use(bodyParser.json())
+
 app.use('/api/v1', todoRoute)
 
 
